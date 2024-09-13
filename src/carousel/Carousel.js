@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, Easing, FlatList, I18nManager, Platform, ScrollView, View } from 'react-native';
+import { Animated, Easing, FlatList, I18nManager, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import shallowCompare from 'react-addons-shallow-compare';
 import {
@@ -11,6 +11,12 @@ import {
   tinderAnimatedStyles,
   tinderScrollInterpolator
 } from '../utils/animations';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})
 
 const IS_IOS = Platform.OS === 'ios',
 
@@ -1257,7 +1263,7 @@ export default class Carousel extends Component {
 
       parallaxProps = hasParallaxImages ? {
         scrollPosition: this._scrollPos,
-        carouselRef: this._carouselRef,
+        carouselRef: this._parentRef,
         vertical,
         sliderWidth,
         sliderHeight,
@@ -1400,14 +1406,19 @@ export default class Carousel extends Component {
 
       ScrollViewComponent = typeof useScrollView === 'function' ? useScrollView : AnimatedScrollView;
 
-    return this._needsScrollView() ? (
-      <ScrollViewComponent {...props}>
+    return (
+      <View style = {styles.container} ref = {(c) => this._parentRef = c}>
         {
-          this._getCustomData().map((item, index) => this._renderItem({ item, index }))
+          this._needsScrollView() ? (
+            <ScrollViewComponent {...props}>
+              {
+                this._getCustomData().map((item, index) => this._renderItem({ item, index }))
+              }
+            </ScrollViewComponent>
+          ) :
+            < AnimatedFlatList {...props} />
         }
-      </ScrollViewComponent>
-    ) : (
-      <AnimatedFlatList {...props} />
-    );
+      </View>
+    )
   }
 }

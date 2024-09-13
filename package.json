@@ -36,24 +36,26 @@
     ],
     "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
     "license": "BSD-3-Clause",
+    "scripts": {
+        "lint": "eslint ."
+    },
     "dependencies": {
         "prop-types": "^15.6.1",
-        "react-addons-shallow-compare": "15.6.2"
+        "react-addons-shallow-compare": "15.6.3"
     },
     "peerDependencies": {
-        "react": ">=15.0.0",
+        "react": "*",
         "react-native": "*"
     },
     "devDependencies": {
-        "babel-eslint": "^8.2.2",
-        "eslint": "^4.19.1",
-        "eslint-config-standard": "^10.2.1",
-        "eslint-config-standard-react": "^5.0.0",
-        "eslint-plugin-import": "^2.11.0",
-        "eslint-plugin-node": "^5.2.1",
-        "eslint-plugin-promise": "^3.7.0",
-        "eslint-plugin-react": "^7.7.0",
-        "eslint-plugin-standard": "^3.0.1"
+        "@babel/core": "^7.25.2",
+        "@babel/eslint-parser": "^7.25.1",
+        "@react-native/babel-preset": "^0.75.3",
+        "eslint": "^8.6.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "eslint-plugin-react": "^7.36.1",
+        "prettier": "^3.3.3"
     },
     "homepage": "https://github.com/meliorence/react-native-snap-carousel",
     "bugs": {
